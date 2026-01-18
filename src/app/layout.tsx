@@ -11,8 +11,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Evento",
-  description: "Evento - Event Management Platform",
+  title: "Evento | Find Events Around You",
+  description:
+    "Browse more than 10,000 events around you. Discover concerts, festivals, workshops, and more in your city with Evento.",
+  authors: [{ name: "Daniel Muszkiet", url: "https://danielmuszkiet.com" }],
 };
 
 export default function RootLayout({
