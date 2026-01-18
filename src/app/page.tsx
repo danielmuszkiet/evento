@@ -2,16 +2,21 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center pt-36 px-3">
-      <h1 className="text-3xl lg:text-6xl font-bold tracking-tight">Find events around you</h1>
-      <p className="m-12 mt-7 text-2xl lg:text-3xl opacity-75 text-center">
+    <main className="flex flex-col items-center justify-center px-3 pt-36">
+      <h1 className="text-3xl font-bold tracking-tight lg:text-6xl">
+        Find events around you
+      </h1>
+      <p className="m-12 mt-7 text-center text-2xl opacity-75 lg:text-3xl">
         Browse more than{" "}
-        <span className="font-bold italic underline text-[#a4f839]">10,000 events</span> around you
+        <span className="font-bold text-[#a4f839] italic underline">
+          10,000 events
+        </span>{" "}
+        around you
       </p>
 
       <form className="w-full sm:w-145">
         <input
-          className="w-full h-16 bg-white/7 rounded-lg px-6 outline-none ring-[#a4f839]/50 transition focus:ring-2 focus:bg-white/10"
+          className="h-16 w-full rounded-lg bg-white/7 px-6 ring-[#a4f839]/50 transition outline-none focus:bg-white/10 focus:ring-2"
           type="text"
           placeholder="Search events in any city..."
           spellCheck={false}

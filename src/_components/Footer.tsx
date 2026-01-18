@@ -7,7 +7,7 @@ const links = [
 
 function Footer() {
   return (
-    <footer className="flex items-center justify-between h-16 border-t border-white/10 px-3 sm:px-9 text-xs text-white/30 mt-auto">
+    <footer className="mt-auto flex h-16 items-center justify-between border-t border-white/10 px-3 text-xs text-white/30 sm:px-9">
       <small className="text-xs">&copy; 2026 Evento - Portfolio Project</small>
       <ul className="flex gap-3 sm:gap-8">
         {links.map((link) => (

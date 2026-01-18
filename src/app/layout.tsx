@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-gray-950 text-white ${inter.className} antialiased`}>
+      <body className={`bg-gray-950 ${inter.className} text-white antialiased`}>
         <Container>
           <Header />
           {children}
