@@ -8,7 +8,7 @@ type EventListProps = {
 
 function EventsList({ events }: EventListProps) {
   return (
-    <section className="mt-18 flex max-w-6xl flex-wrap justify-center gap-10 px-5">
+    <section className="flex max-w-6xl flex-wrap justify-center gap-10 px-5">
       {events.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}
