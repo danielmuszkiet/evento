@@ -1,45 +1,61 @@
 import { EventSchema, EventsSchema } from "@/schemas/event.schema";
 
+import { ZodError } from "zod";
+
 export async function getEvents(city: string) {
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`,
-    {
-      next: {
-        revalidate: 300,
+  try {
+    const res = await fetch(
+      `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`,
+      {
+        next: { revalidate: 300 },
       },
-    },
-  );
+    );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch events");
+    if (!res.ok) {
+      throw new Error(`HTTP Error: ${res.status}`);
+    }
+
+    const json = await res.json();
+
+    // Zod Validation
+    return EventsSchema.parse(json);
+  } catch (error) {
+    if (error instanceof ZodError) {
+      console.error("Zod validation failed:", error.message);
+      throw new Error("Invalid event data received from the server.");
+    }
+
+    console.error("getEvents failed:", error);
+    throw new Error("Events could not be loaded.");
   }
-
-  const json = await res.json();
-
-  // Zod Validation
-  const events = EventsSchema.parse(json);
-
-  return events;
 }
 
 export async function getEvent(slug: string) {
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`,
-    {
-      next: {
-        revalidate: 300,
+  try {
+    const res = await fetch(
+      `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`,
+      {
+        next: { revalidate: 300 },
       },
-    },
-  );
+    );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch events");
+    if (!res.ok) {
+      if (res.status === 404) {
+        throw new Error("Event not found");
+      }
+      throw new Error(`HTTP Error: ${res.status}`);
+    }
+
+    const json = await res.json();
+
+    return EventSchema.parse(json);
+  } catch (error) {
+    if (error instanceof ZodError) {
+      console.error("Zod validation failed:", error.message);
+      throw new Error("Invalid event data received from the server.");
+    }
+
+    console.error("getEvent failed:", error);
+    throw error;
   }
-
-  const json = await res.json();
-
-  // Zod Validation
-  const event = EventSchema.parse(json);
-
-  return event;
 }
