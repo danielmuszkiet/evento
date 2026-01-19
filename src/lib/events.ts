@@ -4,7 +4,9 @@ export async function getEvents(city: string) {
   const res = await fetch(
     `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`,
     {
-      cache: "force-cache",
+      next: {
+        revalidate: 300,
+      },
     },
   );
 
@@ -25,7 +27,7 @@ export async function getEvent(slug: string) {
     `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`,
     {
       next: {
-        revalidate: 60,
+        revalidate: 300,
       },
     },
   );
