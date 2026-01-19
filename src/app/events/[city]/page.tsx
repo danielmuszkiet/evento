@@ -4,6 +4,21 @@ import H1 from "@/components/H1";
 import { capitalize } from "@/utils/helpers";
 import { Suspense } from "react";
 import Loading from "./loading";
+import type { Metadata } from "next";
+
+type MetaDataProps = {
+  params: Promise<{ city: string }>;
+};
+
+export async function generateMetadata({
+  params,
+}: MetaDataProps): Promise<Metadata> {
+  const { city } = await params;
+
+  return {
+    title: `Evento | ${city !== "all" ? `Events in ${capitalize(city)}` : "All Events"}`,
+  };
+}
 
 export default async function EventsPage({
   params,
