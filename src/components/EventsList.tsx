@@ -1,12 +1,12 @@
-import { TEvent } from "@/schemas/event.schema";
-
 import EventCard from "./EventCard";
+import { getEvents } from "@/lib/events";
 
-type EventListProps = {
-  events: TEvent[];
+type EventsListProps = {
+  city: string;
 };
 
-function EventsList({ events }: EventListProps) {
+async function EventsList({ city }: EventsListProps) {
+  const events = await getEvents(city);
   return (
     <section className="flex max-w-6xl flex-wrap justify-center gap-10 px-5">
       {events.map((event) => (
