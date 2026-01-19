@@ -1,8 +1,8 @@
-import { TEvent } from "@/schemas/event.schema";
+import { EventoEvent } from "@/generated/prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-function EventCard({ event }: { event: TEvent }) {
+function EventCard({ event }: { event: EventoEvent }) {
   return (
     <Link
       href={`/event/${event.slug}`}
