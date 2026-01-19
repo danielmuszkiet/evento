@@ -6,7 +6,7 @@ function EventCard({ event }: { event: TEvent }) {
   return (
     <Link
       href={`/event/${event.slug}`}
-      className="h-95 max-w-125 flex-1 basis-80 transition-all duration-300 outline-none hover:scale-105 focus:scale-105 active:scale-102"
+      className="state-effects h-95 max-w-125 flex-1 basis-80"
       draggable={false}
     >
       <section className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-white/3">

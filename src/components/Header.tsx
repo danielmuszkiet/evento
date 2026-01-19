@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./Logo";
 
-import clsx from "clsx";
 import { motion } from "framer-motion";
+import { cn } from "@/utils/cn";
 
 const links = [
   { href: "/", label: "Home" },
@@ -24,7 +24,7 @@ function Header() {
           {links.map(({ href, label }) => (
             <li
               key={href}
-              className={clsx(
+              className={cn(
                 "relative flex items-center transition hover:text-white",
                 isActive(href) ? "text-white" : "text-white/50",
               )}

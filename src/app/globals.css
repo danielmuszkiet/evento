@@ -4,6 +4,10 @@
   --color-accent: #a4f839;
 }
 
+.state-effects {
+  @apply transition-all duration-300 outline-none hover:scale-105 focus:scale-105 active:scale-102
+}
+
 /* SCROLLBAR STYLING */
 /* Chrome, Edge, and Safari */
 ::-webkit-scrollbar {
