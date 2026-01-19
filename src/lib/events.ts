@@ -23,6 +23,11 @@ export async function getEvents(city: string) {
 export async function getEvent(slug: string) {
   const res = await fetch(
     `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    },
   );
 
   if (!res.ok) {
