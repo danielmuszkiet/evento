@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { prisma } from "./prisma";
-import { sleep } from "@/utils/helpers";
 
 const EVENTS_PER_PAGE = 6;
 
