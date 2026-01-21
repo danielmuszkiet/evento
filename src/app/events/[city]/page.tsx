@@ -20,12 +20,19 @@ export async function generateMetadata({
   };
 }
 
+type EventsPageProps = {
+  params: Promise<{ city: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
 export default async function EventsPage({
   params,
-}: {
-  params: Promise<{ city: string }>;
-}) {
+  searchParams,
+}: EventsPageProps) {
   const { city } = await params;
+  const rawPage = (await searchParams).page || "1";
+
+  const page = Array.isArray(rawPage) ? rawPage[0] : rawPage;
 
   return (
     <main className="flex min-h-[110vh] flex-col items-center px-5 py-24">
@@ -34,7 +41,7 @@ export default async function EventsPage({
       </H1>
 
       <Suspense fallback={<Loading />}>
-        <EventsList city={city} />
+        <EventsList city={city} page={Number(page) < 1 ? 1 : Number(page)} />
       </Suspense>
     </main>
   );

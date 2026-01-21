@@ -13,7 +13,7 @@ export async function generateMetadata({
 }: MetaDataProps): Promise<Metadata> {
   const { slug } = await params;
 
-  const event = (await getEvent(slug)) || { name: "Event Not Found" };
+  const event = await getEvent(slug);
 
   return {
     title: `Evento | ${event.name}`,
@@ -27,8 +27,6 @@ export default async function EventPage({
 }) {
   const { slug } = await params;
   const event = await getEvent(slug);
-
-  if (!event) return <p>Event not found</p>;
 
   return (
     <main>
