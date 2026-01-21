@@ -1,16 +1,18 @@
 -- CreateTable
 CREATE TABLE "EventoEvent" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "location" TEXT NOT NULL,
-    "date" DATETIME NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
     "organizerName" TEXT NOT NULL,
     "imageUrl" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "EventoEvent_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
