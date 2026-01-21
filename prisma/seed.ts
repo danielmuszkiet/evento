@@ -1,5 +1,3 @@
-const connectionString = `${process.env.DATABASE_URL}`;
-
 import { prisma } from "@/lib/prisma";
 
 const events = [
