@@ -1,10 +1,11 @@
 import EventsList from "@/components/EventsList";
 import H1 from "@/components/H1";
 
+import { citySchema, pageNumberSchema } from "@/lib/zod-schemas";
 import { capitalize } from "@/utils/helpers";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import Loading from "./loading";
-import type { Metadata } from "next";
 
 type MetaDataProps = {
   params: Promise<{ city: string }>;
@@ -30,18 +31,21 @@ export default async function EventsPage({
   searchParams,
 }: EventsPageProps) {
   const { city } = await params;
-  const rawPage = (await searchParams).page || "1";
+  const rawPage = (await searchParams).page;
 
-  const page = Array.isArray(rawPage) ? rawPage[0] : rawPage;
+  const parsedCity = citySchema.parse(city);
+  const parsedPage = pageNumberSchema.parse(rawPage);
 
   return (
     <main className="flex min-h-[110vh] flex-col items-center px-5 py-24">
       <H1 className="mb-28">
-        {city !== "all" ? `Events in ${capitalize(city)}` : "All Events"}
+        {parsedCity !== "all"
+          ? `Events in ${capitalize(parsedCity)}`
+          : "All Events"}
       </H1>
 
-      <Suspense key={city + page} fallback={<Loading />}>
-        <EventsList city={city} page={Number(page) < 1 ? 1 : Number(page)} />
+      <Suspense key={parsedCity + parsedPage} fallback={<Loading />}>
+        <EventsList city={parsedCity} page={parsedPage} />
       </Suspense>
     </main>
   );
