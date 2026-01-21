@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { prisma } from "./prisma";
+import { sleep } from "@/utils/helpers";
 
 const EVENTS_PER_PAGE = 6;
 
@@ -7,7 +8,6 @@ export async function getEvents(city: string, page = 1) {
   const where = {
     city: city === "all" ? undefined : { contains: city },
   };
-
   const [events, totalCount] = await prisma.$transaction([
     prisma.eventoEvent.findMany({
       where,
