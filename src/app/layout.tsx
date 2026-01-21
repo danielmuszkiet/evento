@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
+import { Suspense } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,7 +27,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`bg-gray-950 ${inter.className} text-white antialiased`}>
         <Container>
-          <Header />
+          <Suspense fallback={<div className="h-14" />}>
+            <Header />
+          </Suspense>
           {children}
           <Footer />
         </Container>
