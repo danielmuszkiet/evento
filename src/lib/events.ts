@@ -11,8 +11,6 @@ export async function getEvents(city: string, page = 1) {
   "use cache";
   cacheLife("hours");
 
-  await sleep(2000);
-
   const where = {
     city: city === "all" ? undefined : { contains: city },
   };
